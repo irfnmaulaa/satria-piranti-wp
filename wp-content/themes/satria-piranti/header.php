@@ -19,7 +19,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:url" content="<?= get_the_permalink() ?>">
     <meta property="og:type" content="website">
-    <?php foreach(get_field('meta_tags') as $meta_property => $meta_content): ?>
+    <?php if(get_field('meta_tags')) foreach(get_field('meta_tags') as $meta_property => $meta_content): ?>
     <?php $value = $meta_content ? $meta_content : $meta_defaults[$meta_property]; ?>
     <meta property="og:<?php echo $meta_property; ?>" content="<?php echo $value; ?>">
     <?php endforeach; ?>
@@ -27,7 +27,7 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?= get_the_permalink() ?>">
-    <?php foreach(get_field('meta_tags') as $meta_property => $meta_content): ?>
+    <?php if(get_field('meta_tags')) foreach(get_field('meta_tags') as $meta_property => $meta_content): ?>
     <?php $value = $meta_content ? $meta_content : $meta_defaults[$meta_property]; ?>
     <meta property="twitter:<?php echo $meta_property; ?>" content="<?php echo $value; ?>">
     <?php endforeach; ?>
@@ -44,10 +44,6 @@
 <div id="content">
 <?php endif; ?>
 
-<input type="checkbox" id="mobile-menus-checkbox" class="hidden"/>
-<header id="header" class="navbar w-full h-[80px] lg:h-[120px] fixed top-0 left-0 bg-white z-[20]">
-    
-Test
-</header>
+<header id="header"></header>
 
 <main class="mt-[80px] lg:mt-[120px]">

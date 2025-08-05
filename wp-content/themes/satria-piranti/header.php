@@ -50,8 +50,22 @@
             <a href="<?php echo get_front_page_url(); ?>" class="logo-wrapper">
                 <img src="<?php echo get_logo(); ?>" alt="logo" class="logo h-[60px]">
             </a>
+
+            <!-- S: Left Menu -->
             <ul class="hidden lg:flex items-center gap-10 h-full text-[18px] font-semibold">
-                <?php foreach(get_menus() as $menu): ?>
+                <?php 
+                $menus = get_menus();  
+
+                $left_menus = [];
+                foreach($menus as $i => $menu) {
+                    if($i < 5) {
+                        $left_menus[] = $menu;
+                    } else {
+                        $right_menus[] = $menu;
+                    }
+                }
+                
+                foreach($left_menus as $menu): ?>
                     <?php if($menu['children']): ?>
                         <?php $is_active = in_array(get_the_permalink(), array_map(function ($child) { return $child['url']; }, $menu['children'])); ?>
                         <li class="dropdown group relative h-full flex items-center ">
@@ -79,10 +93,50 @@
                     <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
+            <!-- S: Left Menu -->
         </div>
+
+        <!-- S: Right Menu -->
         <div>
-            Test
+            <ul class="hidden lg:flex items-center gap-10 h-full text-[18px] font-semibold">
+                <?php  
+                foreach($right_menus as $i => $menu): ?>
+                    <?php if($i === count($right_menus) - 1): ?>
+                        <a href="<?php echo $menu['url']; ?>" class="inline-flex items-center gap-3 px-6 py-3 bg-[#F26B4A] rounded-lg">
+                            <span class="text-white text-base font-bold font-plus-jakarta-sans"><?php echo $menu['title']; ?></span>
+                        </a>
+                    <?php else: ?> 
+                        <?php if($menu['children']): ?>
+                            <?php $is_active = in_array(get_the_permalink(), array_map(function ($child) { return $child['url']; }, $menu['children'])); ?>
+                            <li class="dropdown group relative h-full flex items-center ">
+                                <a href="<?php echo $menu['url']; ?>" class="nav-link <?php echo $is_active ? 'active' : ''; ?>">
+                                    <?php echo $menu['title']; ?>
+                                </a>
+                                <div class="absolute left-0 bottom-0 translate-y-[calc(100%_-_1.5rem)] min-w-[161px] pointer-events-none group-hover:pointer-events-auto opacity-0 group-hover:opacity-100 transition duration-100">
+                                    <div class="w-full bg-white p-3 rounded-[8px] border border-[#C0C0C0]">
+                                        <?php foreach($menu['children'] as $child): ?>
+                                            <a href="<?php echo $child['url']; ?>" class="flex items-center gap-2.5 h-full leading-[1] p-3">
+                                            <span class="nav-link border-b border-b-transparent <?php echo get_the_permalink() === $child['url'] ? 'active' : ''; ?>">
+                                                <?php echo $child['title']; ?>
+                                            </span>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php else: ?>
+                            <li>
+                                <a href="<?php echo $menu['url']; ?>" class="nav-link <?php echo get_the_permalink() === $menu['url'] ? 'active' : ''; ?>">
+                                    <?php echo $menu['title']; ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
         </div>
+        <!-- E: Right Menu -->
+
     </div>
 </header>
 

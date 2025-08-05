@@ -91,7 +91,10 @@ if ($lang === 'id') {
         </div>
     </div>
 </section>
-<!-- E: Other News -->
+<!-- E: Other News --> 
 
+<!-- S: Footer -->
+<?php get_template_part('parts/part-footer', null, ['section' => $section]); ?>
+<!-- E: Footer -->
 
 <?php get_footer(); ?>

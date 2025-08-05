@@ -59,9 +59,9 @@
   </div>
 
   <?php if($section['whatsapp_floating_button']): ?>
-    <button class="scroll-to-top fixed bottom-8 right-8 w-16 h-16 bg-teal-800 rounded-full flex items-center justify-center">
-      <div class="w-8 h-8 bg-white"></div>
-    </button>
+    <a href="<?php echo $section['whatsapp_floating_button']['link']['url']; ?>" target="<?php echo $section['whatsapp_floating_button']['link']['target']; ?>" class="scroll-to-top fixed bottom-8 right-8 w-16 h-16 bg-teal-800 rounded-full flex items-center justify-center">
+      <img src="<?php echo wp_get_attachment_url($section['whatsapp_floating_button']['icon']['ID'] ?? $section['whatsapp_floating_button']['icon']); ?>" alt="" class="w-8 h-8">
+    </a>
   <?php endif; ?>
 </section>
 <?php endif; ?>

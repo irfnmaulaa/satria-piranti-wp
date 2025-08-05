@@ -266,7 +266,9 @@ function remove_comment_meta() {
 add_action('init', 'remove_comment_meta');
 
 function get_current_lang() {
-    return get_field('lang', get_the_ID());
+    $lang = get_field('lang', get_the_ID());
+    $default_lang = "id";
+    return $lang ?? $default_lang;
 }
 
 function get_current_lang_details()
@@ -345,6 +347,36 @@ function get_products($limit = -1)
     $args = [
         'posts_per_page' => $limit,
         'post_type' => 'product',
+        'meta_query' => [
+            [
+                'key' => 'lang',
+                'value' => get_current_lang(),
+                'compare' => '=',
+            ]
+        ]
+    ];
+
+    // Handle category filter from query parameter
+    if (isset($_GET['category'])) {
+        $categories = explode(',', $_GET['category']);
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'product-category',
+                'field' => 'slug',
+                'terms' => $categories,
+                'operator' => 'IN'
+            )
+        );
+    }
+
+    return get_posts($args);
+}
+
+function get_car_rentals($limit = -1)
+{
+    $args = [
+        'posts_per_page' => $limit,
+        'post_type' => 'car-rental',
 //        'meta_key' => 'product_order',
 //        'orderby' => 'meta_value',
 //        'order' => 'ASC',
@@ -404,11 +436,11 @@ function get_front_page_url(): string
 {
     $lang = get_field('lang', get_the_ID());
 
-    if($lang === 'en') {
+    if($lang === 'id') {
         return site_url('/');
     }
 
-    return site_url('/' . $lang);
+    return site_url('/home-' . $lang);
 }
 
 function get_product_categories()
@@ -572,3 +604,23 @@ function get_cta_data()
     return get_posts($args)[0];
 }
 
+function get_articles($post_type = 'post', $posts_per_page = 30) {
+    $args = [
+        'post_type' => $post_type,
+        'posts_per_page' => $posts_per_page,
+        'post_status' => 'publish'
+    ];
+
+    // Add category filter if category slug is provided in query params
+    if (isset($_GET['category'])) {
+        $args['tax_query'] = [
+            [
+                'taxonomy' => $post_type . '-category', // Assumes taxonomy follows pattern: post-type-category
+                'field' => 'slug',
+                'terms' => $_GET['category']
+            ]
+        ];
+    }
+
+    return get_posts($args);
+}

@@ -7,13 +7,12 @@ add_action('wp_enqueue_scripts', function () {
 
     // scripts
     wp_enqueue_script('jquery');
-    wp_enqueue_script('swiper-js', get_stylesheet_directory_uri() . '/js/swiper.min.js');
+    wp_enqueue_script('siema-js', get_stylesheet_directory_uri() . '/js/siema.min.js');
     wp_enqueue_script('font-awesome-js', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js');
     wp_enqueue_script('index-js', get_stylesheet_directory_uri() . '/js/index.js', array('jquery'));
 
     // styles
     wp_enqueue_style('font-awesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
-    wp_enqueue_style('swiper-css', get_stylesheet_directory_uri() . '/css/swiper.min.css');
     wp_enqueue_style('index-css', get_stylesheet_directory_uri() . '/css/index.css');
 
 });
@@ -504,11 +503,16 @@ function get_latest_news($limit = -1)
 
 add_filter('use_block_editor_for_post', '__return_false');
 
-function my_own_mime_types( $mimes ) {
+function my_own_mime_types($mimes) {
+    // Add support for various image formats
     $mimes['svg'] = 'image/svg+xml';
+    $mimes['webp'] = 'image/webp';
+    $mimes['gif'] = 'image/gif';
+    $mimes['jpg|jpeg'] = 'image/jpeg';
+    $mimes['png'] = 'image/png';
     return $mimes;
 }
-add_filter( 'upload_mimes', 'my_own_mime_types' );
+add_filter('upload_mimes', 'my_own_mime_types');
 
 function encodeURIComponent($str) {
     $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
@@ -531,3 +535,40 @@ function get_page_url_by_lang($slug, $lang, $default_url = '')
 
     return $default_url;
 }
+
+function get_trusted_companies_data()
+{
+    $the_slug = 'trusted-by-company-' . get_current_lang();
+    $args = array(
+        'name'           => $the_slug,
+        'post_type'      => 'part',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1
+    );
+    return get_posts($args)[0];
+}
+
+function get_testimonial_data()
+{
+    $the_slug = 'testimonial-' . get_current_lang();
+    $args = array(
+        'name'           => $the_slug,
+        'post_type'      => 'part',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1
+    );
+    return get_posts($args)[0];
+}
+
+function get_cta_data()
+{
+    $the_slug = 'call-to-action-' . get_current_lang();
+    $args = array(
+        'name'           => $the_slug,
+        'post_type'      => 'part',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1
+    );
+    return get_posts($args)[0];
+}
+

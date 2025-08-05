@@ -140,4 +140,4 @@
     </div>
 </header>
 
-<main class="mt-[80px] lg:mt-[120px]">
+<main class="mt-[80px] lg:mt-[108px]">

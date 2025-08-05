@@ -1756,6 +1756,11 @@ video {
   padding-right: 2.5rem;
 }
 
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .pl-4{
   padding-left: 1rem;
 }
@@ -1965,6 +1970,10 @@ video {
   opacity: 0.2;
 }
 
+.opacity-100{
+  opacity: 1;
+}
+
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -2028,8 +2037,28 @@ video {
   transition-duration: 150ms;
 }
 
+.transition-all{
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-opacity{
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .duration-100{
   transition-duration: 100ms;
+}
+
+.duration-300{
+  transition-duration: 300ms;
+}
+
+.duration-500{
+  transition-duration: 500ms;
 }
 
 .ease-out{
@@ -2604,6 +2633,10 @@ a:not(.btn):not(.tab-item):not(.logo-wrapper):not(.nav-link.active):not(.social-
 
   .lg\:mt-\[120px\]{
     margin-top: 120px;
+  }
+
+  .lg\:mt-\[108px\]{
+    margin-top: 108px;
   }
 
   .lg\:flex{

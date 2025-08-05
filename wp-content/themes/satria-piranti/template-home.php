@@ -9,39 +9,94 @@
 <!-- S: Hero Section -->
 <?php
 $hero = get_field('hero_with_carousel');
-if ($hero): 
+if ($hero && !empty($hero['items'])): 
+  $active_index = 0;
 ?>
 <section class="relative h-[643px] py-24 flex items-center">
-  <div class="max-w-[1448px] px-10 mx-auto flex justify-between">
+  <?php foreach(array_values($hero['items']) as $index => $item): ?>
+    <div class="absolute inset-0 transition-opacity duration-500 <?php echo $index === $active_index ? 'opacity-100' : 'opacity-0'; ?>" style="background: url('<?php echo wp_get_attachment_url($item['background_image']['ID'] ?? $item['background_image']); ?>') center/cover no-repeat;"></div>
+  <?php endforeach; ?>
+
+  <div class="max-w-[1448px] px-10 mx-auto flex justify-between relative">
     <div class="w-[716px] flex flex-col gap-5">
       <div class="flex gap-2.5 skew-x-[45deg]">
-        <div class="w-11 h-2 bg-red-500"></div>
-        <div class="w-11 h-2 bg-slate-200"></div>
-        <div class="w-11 h-2 bg-slate-200"></div>
+        <?php foreach(array_values($hero['items']) as $index => $item): ?>
+          <div class="w-11 h-2 cursor-pointer transition-colors duration-300 <?php echo $index === $active_index ? 'bg-red-500' : 'bg-slate-200'; ?>" data-index="<?php echo $index; ?>"></div>
+        <?php endforeach; ?>
       </div>
-      <div class="flex flex-col gap-14">
-        <div class="flex flex-col gap-5">
-          <h1 class="text-white text-5xl font-semibold font-plus-jakarta leading-[62px]"><?php echo esc_html($hero['title']); ?></h1>
-          <p class="text-white text-xl font-normal font-plus-jakarta leading-7"><?php echo esc_html($hero['description']); ?></p>
-        </div>
-      </div>
-    </div>
-    <?php if (!empty($hero['items'])): ?>
-    <div class="w-[716px] flex flex-col gap-14">
-      <div class="flex flex-col gap-5">
-        <?php foreach($hero['items'] as $key => $item): ?>
-        <div class="flex justify-end items-<?php echo $key === 0 ? 'center' : 'start'; ?> gap-5">
-          <span class="text-<?php echo $key === 0 ? 'white' : 'slate-300'; ?> text-xl font-medium font-plus-jakarta leading-7"><?php echo esc_html($item['text']); ?></span>
-          <div class="w-6 h-6 relative <?php echo $key === 0 ? '' : 'opacity-0'; ?> overflow-hidden">
-            <div class="w-3.5 h-6 absolute left-[5px] top-0 border border-white"></div>
+
+      <div class="carousel-content">
+        <?php foreach(array_values($hero['items']) as $index => $item): ?>
+          <div class="flex flex-col gap-14 transition-opacity duration-500 <?php echo $index === $active_index ? 'opacity-100' : 'opacity-0 absolute'; ?>">
+            <div class="flex flex-col gap-5">
+              <h1 class="text-white text-5xl font-semibold font-plus-jakarta leading-[62px]"><?php echo esc_html($item['title']); ?></h1>
+              <p class="text-white text-xl font-normal font-plus-jakarta leading-7"><?php echo esc_html($item['description']); ?></p>
+            </div>
           </div>
-        </div>
         <?php endforeach; ?>
       </div>
     </div>
-    <?php endif; ?>
+
+    <div class="w-[716px] flex flex-col gap-14">
+      <div class="flex flex-col gap-5">
+        <?php foreach(array_values($hero['links']) as $index => $link): ?>
+          <div class="flex justify-end items-start gap-5 transition-all duration-300">
+            <span class="text-<?php echo $index === $active_index ? 'white' : 'slate-300'; ?> text-xl font-medium font-plus-jakarta leading-7"><?php echo esc_html($link['title']); ?></span>
+            <div class="w-6 h-6 relative <?php echo $index === $active_index ? '' : 'opacity-0'; ?> overflow-hidden transition-opacity duration-300">
+              <div class="w-3.5 h-6 absolute left-[5px] top-0 border border-white"></div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const dots = document.querySelectorAll('[data-index]');
+  dots.forEach(dot => {
+    dot.addEventListener('click', function() {
+      const index = this.dataset.index;
+      updateCarousel(parseInt(index));
+    });
+  });
+});
+
+function updateCarousel(activeIndex) {
+  // Update dots
+  document.querySelectorAll('[data-index]').forEach((dot, i) => {
+    dot.classList.toggle('bg-red-500', i === activeIndex);
+    dot.classList.toggle('bg-slate-200', i !== activeIndex);
+  });
+
+  // Update backgrounds
+  document.querySelectorAll('.absolute.inset-0').forEach((bg, i) => {
+    bg.classList.toggle('opacity-0', i !== activeIndex);
+    bg.classList.toggle('opacity-100', i === activeIndex);
+  });
+
+  // Update content
+  document.querySelectorAll('.carousel-content > div').forEach((content, i) => {
+    content.classList.toggle('opacity-0', i !== activeIndex);
+    content.classList.toggle('absolute', i !== activeIndex);
+    content.classList.toggle('opacity-100', i === activeIndex);
+  });
+
+  // Update right side items
+  document.querySelectorAll('.flex.justify-end').forEach((item, i) => {
+    item.classList.toggle('items-center', i === activeIndex);
+    item.classList.toggle('items-start', i !== activeIndex);
+    
+    const textSpan = item.querySelector('span');
+    textSpan.classList.toggle('text-white', i === activeIndex);
+    textSpan.classList.toggle('text-slate-300', i !== activeIndex);
+    
+    const indicator = item.querySelector('.relative');
+    indicator.classList.toggle('opacity-0', i !== activeIndex);
+  });
+}
+</script>
 <?php endif; ?>
 <!-- E: Hero Section -->
 

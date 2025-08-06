@@ -41,7 +41,7 @@ add_action('init', function () {
             'all_items' => 'All Products',
         ],
         'public' => true,
-        'supports' => ['title',],
+        'supports' => ['title', 'thumbnail'],
         'menu_position' => 20,
         'menu_icon' => 'dashicons-cart',
         'show_in_rest' => true,
@@ -357,7 +357,7 @@ function get_products($limit = -1)
     ];
 
     // Handle category filter from query parameter
-    if (isset($_GET['category'])) {
+    if (isset($_GET['category']) && $_GET['category'] != '') {
         $categories = explode(',', $_GET['category']);
         $args['tax_query'] = array(
             array(

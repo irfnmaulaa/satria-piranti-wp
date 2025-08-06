@@ -85,12 +85,7 @@ section {
 
 .nav-link {
     line-height: 1 !important;
-}
-
-.nav-link.active, .nav-link:hover, .group:hover > .nav-link{
-    border-bottom: 1px solid #E1261C;
-    color: #E1261C;
-}
+} 
 
 .nav-link-sm, #mobile-menus label .icon {
     opacity: 0.5;
@@ -119,12 +114,7 @@ section {
 
 .navbar-dark.on-scrolling .logo {
     filter: none;
-}
-
-.navbar-dark.on-scrolling .nav-link.active {
-    border-bottom: 1px solid #E1261C;
-    color: #E1261C;
-}
+} 
 
 .contact-maps-wrapper iframe {
     width: 100%;

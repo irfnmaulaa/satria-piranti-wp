@@ -4,31 +4,43 @@
  *
  * @package Satria-Piranti
  */
-
 get_header();
 ?>
-
 <?php 
 $details = get_field('product_details'); 
 $specifications = explode("\n", $details['spesification']);
 ?>
-
-<section class="product-detail">
+<section class="product-detail"></section>
   <div class="container mx-auto px-8 py-14 flex justify-center items-start gap-14">
     <div class="flex-1 h-[602px] p-5 bg-slate-100 rounded-xl flex items-center gap-2.5 overflow-hidden">
-      <?php if (!empty($details['image'])) : ?>
-        <img class="w-full h-full object-cover" src="<?php echo wp_get_attachment_url($details['image']['ID'] ?? $details['image']); ?>" alt="<?php echo esc_attr($details['name']); ?>" />
+      <?php if (has_post_thumbnail()) : ?>
+        <img class="w-full h-full object-cover" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
       <?php else : ?>
-        <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="Product Image" />
+        <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.png" alt="Product Image" />
       <?php endif; ?>
     </div>
     <div class="flex-1 flex flex-col gap-10">
       <?php 
-        $category = get_the_terms(get_the_ID(), 'product-category');
-        $category_name = $category ? $category[0]->name : '';
+        // Get all product categories for current post
+        $categories = get_the_terms(get_the_ID(), 'product-category');
+        $category_name = '';
+
+      
+        if ($categories) {
+          foreach ($categories as $category) {
+            // Get parent term
+            $parent = get_term($category->parent, 'product-category');
+            
+            // Check if parent slug is 'capital'
+            if ($parent && $parent->slug === 'category') {
+              $category_name = $category->name;
+              break;
+            }
+          }
+        }
       ?>
       <span class="text-slate-500 text-sm font-semibold font-plus-jakarta leading-tight"><?php echo esc_html($category_name); ?></span>
-      <h1 class="text-black text-3xl font-semibold font-plus-jakarta leading-9"><?php echo esc_html($details['name']); ?></h1>
+      <h1 class="text-black text-3xl font-semibold font-plus-jakarta leading-9"><?php echo get_the_title(); ?></h1>
       <div class="flex gap-4">
         <div class="flex-1 flex flex-col gap-2">
           <span class="text-slate-500 text-sm font-semibold font-plus-jakarta leading-tight">Kapasitas</span>
@@ -158,19 +170,38 @@ if($related_products->have_posts()) :
       ?>
       <div class="flex flex-col gap-6" style="margin-right: 32px;">
         <a href="<?php the_permalink(); ?>" class="h-72 p-5 bg-slate-100 rounded-xl flex items-center overflow-hidden">
-          <?php if (!empty($details['image'])) : ?>
-            <img class="w-full h-full object-cover" src="<?php echo wp_get_attachment_url($details['image']['ID'] ?? $details['image']); ?>" alt="<?php echo esc_attr($details['name']); ?>" />
+          <?php if (has_post_thumbnail()) : ?>
+            <img class="w-full h-full object-cover" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
           <?php else : ?>
-            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="Product Image" />
+            <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.png" alt="Product Image" />
           <?php endif; ?>
         </a>
         <div class="flex flex-col gap-4">
           <div class="flex flex-col">
-            <?php if ($current_categories && !empty($current_categories[0]->name)) : ?>
-              <span class="text-black text-sm font-semibold font-plus-jakarta leading-tight"><?php echo esc_html($current_categories[0]->name); ?></span>
-            <?php endif; ?>
+            <span class="text-black text-sm font-semibold font-plus-jakarta leading-tight">
+              <?php 
+                // Get all product categories for current post
+                $categories = get_the_terms(get_the_ID(), 'product-category');
+                $category_name = '';
+
+              
+                if ($categories) {
+                  foreach ($categories as $category) { 
+                    // Get parent term
+                    $parent = get_term($category->parent, 'product-category');
+                     
+                    // Check if parent slug is 'capital'
+                    if ($parent && $parent->slug === 'category') {
+                      $category_name = $category->name; 
+                    }
+                  }
+                }
+
+                echo $category_name;
+              ?>
+            </span>
             <a href="<?php the_permalink(); ?>" class="text-black text-2xl font-semibold font-plus-jakarta leading-loose hover:text-[#1A6250]">
-              <?php echo esc_html($details['name'] ?? ''); ?>
+              <?php echo get_the_title(); ?>
             </a>
           </div>
           <?php if (!empty($details['capacity']) || !empty($details['load_center'])) : ?>

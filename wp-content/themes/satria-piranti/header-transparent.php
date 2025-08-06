@@ -44,7 +44,7 @@
 <div id="content">
 <?php endif; ?>
 
-<header id="header" class="navbar fixed top-0 left-0 bg-white z-[20] h-[80px] md:h-[108px] border-b w-full">
+<header id="header" class="navbar navbar-dark fixed top-0 left-0 bg-transparent z-[20] h-[80px] md:h-[108px] w-full">
     <div class="max-w-[1448px] mx-auto px-4 md:px-8 h-full flex items-center justify-between">
         <div class="flex items-center gap-12 h-full">
             <a href="<?php echo get_front_page_url(); ?>" class="logo-wrapper">
@@ -79,7 +79,7 @@
                         }
                         ?>
                         <li class="dropdown group <?php echo !$has_grandchildren ? 'relative' : ''; ?> h-full flex items-center">
-                            <a href="<?php echo $menu['url']; ?>" class="nav-link h-full flex items-center justify-center gap-2 px-5 <?php echo $is_active ? 'active' : ''; ?>">
+                            <a href="<?php echo $menu['url']; ?>" class="nav-link h-full flex items-center justify-center gap-2 px-5 text-white <?php echo $is_active ? 'active' : ''; ?>">
                                 <?php echo $menu['title']; ?>
                                 <i class="fas fa-chevron-down text-sm transition-transform group-hover:rotate-180"></i> 
                             </a>
@@ -226,7 +226,7 @@
                         </li>
                     <?php else: ?>
                         <li class="h-full">
-                            <a href="<?php echo $menu['url']; ?>" class="nav-link h-full flex items-center justify-center px-5 <?php echo get_the_permalink() === $menu['url'] ? 'active' : ''; ?>">
+                            <a href="<?php echo $menu['url']; ?>" class="nav-link h-full flex items-center justify-center px-5 text-white <?php echo get_the_permalink() === $menu['url'] ? 'active' : ''; ?>">
                                 <?php echo $menu['title']; ?>
                             </a>
                         </li>
@@ -240,15 +240,15 @@
         <div>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="lg:hidden flex items-center justify-center w-10 h-10 focus:outline-none">
-                <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg id="hamburger-icon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg id="close-icon" class="w-6 h-6 hidden text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
             
-            <ul class="hidden lg:flex items-center gap-10 h-full text-[18px] font-semibold">
+            <ul class="hidden lg:flex items-center gap-10 h-full text-[18px] font-semibold text-white">
                 <?php  
                 foreach($right_menus as $i => $menu): ?>
                     <?php if($i === count($right_menus) - 1): ?>
@@ -261,10 +261,9 @@
                                 <div class="w-4 h-4 relative">
                                     <img id="language-flag" src="<?php echo get_template_directory_uri(); ?>/img/indonesia.png" alt="language flag">
                                 </div>
-                                <span id="selected-language" class="text-black text-lg font-semibold font-plus-jakarta-sans">Indonesia</span>
-                                <svg class="w-4 h-4 text-gray-800 pointer-events-none transition-transform" id="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
+                                <span id="selected-language" class="text-lg font-semibold font-plus-jakarta-sans">
+                                    <span class="nav-link text-white inline-flex gap-2 items-center">Indonesia <i class="fas fa-chevron-down text-sm"></i></span> 
+                                </span> 
                             </button>
                             <div id="language-dropdown" class="hidden absolute top-full mt-2 w-full bg-white rounded-xl border border-slate-200 overflow-hidden">
                                 <div class="py-1">
@@ -412,4 +411,4 @@
     });
 </script>
 
-<main class="mt-[80px] lg:mt-[108px]">
+<main>

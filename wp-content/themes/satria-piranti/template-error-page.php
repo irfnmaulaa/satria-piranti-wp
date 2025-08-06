@@ -8,9 +8,9 @@ get_header();
 
 <main id="main" class="site-main">
   <section class="error-page bg-slate-50">
-    <div class="container mx-auto px-8 py-28 flex flex-col gap-14">
-      <div class="flex flex-col gap-5">
-        <h1 class="text-5xl font-semibold font-plus-jakarta-sans leading-[62px]"><?php the_title(); ?></h1>
+    <div class="container mx-auto px-4 md:px-8 py-16 md:py-28 flex flex-col gap-8 md:gap-14">
+      <div class="flex flex-col gap-4 md:gap-5">
+        <h1 class="text-3xl md:text-5xl font-semibold font-plus-jakarta-sans leading-tight md:leading-[62px]"><?php the_title(); ?></h1>
         <div class="text-base font-normal font-plus-jakarta-sans leading-normal">
           <?php the_content(); ?>
         </div>

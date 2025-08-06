@@ -84,27 +84,46 @@
           
           if($products): foreach($products as $product): 
             // Get product metadata
-            $category = get_the_terms($product->ID, 'product-category');
-
             $details = get_field('product_details', $product->ID);
             $capacity = $details['capacity'];
-            $load_center = $details['load_center'];  
-            $featured_image = wp_get_attachment_url($details['image']['ID'] ?? $details['image']);
+            $load_center = $details['load_center'];
           ?>
+
+          <?php 
+            // Get all product categories for current post
+            $categories = get_the_terms($product->ID, 'product-category');
+            $category_name = '';
+
+          
+            if ($categories) {
+              foreach ($categories as $category) { 
+                // Get parent term
+                $parent = get_term($category->parent, 'product-category');
+                  
+                // Check if parent slug is 'capital'
+                if ($parent && $parent->slug === 'category') {
+                  $category_name = $category->name; 
+                }
+              }
+            }
+
+          ?>
+
+
           <div class="w-60 bg-white flex flex-col justify-start items-start gap-6">
             <a href="<?php echo get_the_permalink($product->ID); ?>" class="w-full h-60 p-5 bg-slate-100 rounded-xl flex justify-center items-center overflow-hidden">
                 <img class="w-full h-full object-cover" 
-                   src="<?php echo $featured_image ?: 'https://placehold.co/193x193'; ?>" 
+                   src="<?php echo get_the_post_thumbnail_url($product->ID) ?: get_stylesheet_directory_uri() . '/img/placeholder.png'; ?>" 
                    alt="<?php echo esc_attr($product->post_title); ?>" />
             </a>
             <div class="w-full flex flex-col gap-4">
               <div class="flex flex-col">
                 <div class="text-slate-500 text-sm font-semibold font-plus-jakarta-sans">
-                  <?php echo $category ? esc_html($category[0]->name) : ''; ?>
+                  <?php echo $category_name; ?>
                 </div>
                 <div class="text-black text-lg font-semibold font-plus-jakarta-sans leading-7">
                     <a href="<?php echo get_the_permalink($product->ID); ?>">
-                        <?php echo esc_html($product->post_title); ?>
+                        <?php echo get_the_title($product->ID); ?>
                     </a>
                 </div>
               </div>

@@ -8,9 +8,9 @@
 
 <!-- S: Hero -->
 <?php if($section = get_field('hero')): ?> 
-<section class="px-[124px] py-[120px] bg-white">
+<section class="px-4 md:px-[124px] py-16 md:py-[120px] bg-white">
     <div class="container">
-        <h1 class="text-[48px] leading-[62px] font-semibold">
+        <h1 class="text-3xl md:text-[48px] leading-tight md:leading-[62px] font-semibold">
             <?php echo $section['title']; ?>
         </h1>
     </div>
@@ -21,20 +21,20 @@
 <?php if($section = get_field('contact')): ?>
 
 <?php if($head_quarter = $section['head_quarter']): ?>
-<section class="relative bg-slate-50 px-32 py-24 ">
+<section class="relative bg-slate-50 px-4 md:px-32 py-16 md:py-24 ">
   <div class="container">
-    <div class="flex flex-col items-center gap-14 overflow-hidden">
-      <div class="w-full flex flex-col items-start gap-8">
-        <div class="w-full flex items-center gap-8">
-          <div class="flex-1">
+    <div class="flex flex-col items-center gap-8 md:gap-14 overflow-hidden">
+      <div class="w-full flex flex-col items-start gap-6 md:gap-8">
+        <div class="w-full flex flex-col md:flex-row items-center gap-8">
+          <div class="w-full md:flex-1">
             <?php echo $head_quarter['map_embed']; ?>
           </div>
           
-          <div class="flex-1 flex flex-col items-start gap-8">
-            <h2 class="w-full text-4xl font-semibold font-plus-jakarta leading-10 text-black">
+          <div class="w-full md:flex-1 flex flex-col items-start gap-6 md:gap-8">
+            <h2 class="w-full text-2xl md:text-4xl font-semibold font-plus-jakarta leading-tight md:leading-10 text-black">
               <?php echo $head_quarter['title']; ?>
             </h2>
-            <p class="w-full text-xl font-normal font-plus-jakarta leading-7 text-black">
+            <p class="w-full text-lg md:text-xl font-normal font-plus-jakarta leading-normal md:leading-7 text-black">
               <?php echo $head_quarter['address']; ?>
             </p>
             <?php if($link = $head_quarter['link']): ?>
@@ -57,15 +57,15 @@
 <?php if($opens = $section['opens']): ?>
 <section class="border-b border-slate-200">
   <div class="container">
-    <div class="py-10 flex flex-col items-center">
-      <div class="p-8 flex flex-col items-center gap-10">
-        <div class="w-full flex justify-center items-start gap-14">
+    <div class="py-8 md:py-10 flex flex-col items-center">
+      <div class="p-4 md:p-8 flex flex-col items-center gap-6 md:gap-10">
+        <div class="w-full grid grid-cols-2 md:flex md:justify-center md:items-start gap-6 md:gap-14">
             <?php foreach($opens as $open): ?>
-                <div class="flex flex-col items-center gap-2.5">
-                    <p class="text-xl font-normal font-plus-jakarta leading-7 text-black text-center">
+                <div class="flex flex-col items-center gap-2 md:gap-2.5">
+                    <p class="text-lg md:text-xl font-normal font-plus-jakarta leading-normal md:leading-7 text-black text-center">
                     <?php echo $open['day']; ?>
                     </p>
-                    <p class="text-2xl font-semibold font-plus-jakarta leading-loose text-black text-center">
+                    <p class="text-xl md:text-2xl font-semibold font-plus-jakarta leading-tight md:leading-loose text-black text-center">
                     <?php echo $open['clock']; ?>
                     </p>
                 </div>

@@ -156,7 +156,7 @@ $products = get_field('products_section');
 if ($products):
 ?>
 <section class="py-10 md:py-14" id="products-section">
-  <div class="container mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
+  <div class="container mx-auto px-4 md:px-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0 mb-8 md:mb-14">
       <div class="flex-1">
         <h2 class="text-2xl md:text-3xl font-bold font-plus-jakarta leading-tight md:leading-9 mb-3 md:mb-6"><?php echo esc_html($products['title']); ?></h2>
@@ -194,7 +194,7 @@ $spare_parts = get_field('spare_parts_section');
 if ($spare_parts):
 ?>
 <section class="py-10 md:py-14" id="spare-parts-section">
-  <div class="container mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
+  <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0 mb-8 md:mb-14">
       <div class="flex-1">
         <h2 class="text-2xl md:text-3xl font-bold font-plus-jakarta leading-tight md:leading-9 mb-3 md:mb-6"><?php echo esc_html($spare_parts['title']); ?></h2>
@@ -235,7 +235,7 @@ $logistics = get_field('logistics_section');
 if ($logistics && !empty($logistics['title'])):
 ?>
 <section class="py-10 md:py-14" id="logistics-section">
-  <div class="container mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
+  <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0 mb-8 md:mb-14">
       <div class="flex-1">
         <h2 class="text-2xl md:text-3xl font-bold font-plus-jakarta leading-tight md:leading-9 mb-3 md:mb-6"><?php echo esc_html($logistics['title']); ?></h2>
@@ -277,7 +277,7 @@ $about = get_field('about_section');
 if ($about && !empty($about['title'])):
 ?>
 <section class="py-16 md:py-24 bg-[#DDFFF7] relative" id="about-section">
-  <div class="container mx-auto px-4 md:px-8 lg:px-16 xl:px-32 relative">
+  <div class="container mx-auto px-4 relative">
     <div class="absolute opacity-20 bg-emerald-400 w-[300px] md:w-[537px] h-10 md:h-16 right-0 bottom-0 translate-y-[calc(100%_+_31px)] skew-x-[45deg]"></div>
     <div class="absolute opacity-20 bg-[#F26B4A] w-[250px] md:w-[500px] h-12 md:h-20 left-[0px] top-[0] translate-x-[-30px] md:translate-x-[-50px] translate-y-[-50%] skew-x-[45deg]"></div>
 
@@ -330,7 +330,7 @@ $blog = get_field('blog_section');
 if ($blog):
 ?>
 <section class="py-12 md:py-20 bg-white">
-  <div class="container mx-auto px-4 md:px-8">
+  <div class="container mx-auto">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0 mb-8 md:mb-16">
       <div class="w-full md:w-[812px]">
         <h2 class="text-2xl md:text-3xl font-bold font-plus-jakarta leading-tight md:leading-9"><?php echo esc_html($blog['title']); ?></h2>

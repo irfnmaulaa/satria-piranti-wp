@@ -8,7 +8,7 @@
 <!-- S: Trusted Companies -->
 <?php if($data = get_trusted_companies_data()): ?>
 <?php if($section = get_field('trusted_by_company', $data->ID)): ?>
-<section class="px-4 md:px-8 lg:px-32 py-12 md:py-24 bg-white border-t border-b">
+<section class="px-4 py-12 md:py-24 bg-white border-t border-b">
   <div class="container">
     <div class="flex flex-col items-center gap-14">
       <div class="w-full">

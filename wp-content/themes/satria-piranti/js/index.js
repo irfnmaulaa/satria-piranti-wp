@@ -8,7 +8,11 @@ $(document).ready(function() {
     let heroBg, currentSlideshowIndex = 0, slideshowTimeout
     function updatePage() {
 
-        updateTestimonial()
+        try {
+            updateTestimonial()
+        } catch (e) {
+            
+        }
 
         heroBg = $('.hero-bg')
 

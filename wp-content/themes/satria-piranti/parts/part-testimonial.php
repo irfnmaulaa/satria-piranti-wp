@@ -11,7 +11,7 @@ $items = $testimonial['items'];
 ?>
 
 <section class="bg-white border-b border-slate-200">
-  <div class="container mx-auto py-12 md:py-24 px-4 md:px-0">
+  <div class="container mx-auto py-12 md:py-24">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 mb-6 md:mb-10">
       <div>
         <h2 class="text-2xl md:text-4xl font-semibold font-plus-jakarta-sans leading-8 md:leading-10 text-black text-center md:text-left">

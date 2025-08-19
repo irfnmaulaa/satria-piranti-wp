@@ -20,7 +20,7 @@ $section = get_field('cta', $data->ID);
 </div>
 
 <section class="bg-[#1A6250] py-12 md:py-20">
-  <div class="container mx-auto max-w-7xl px-4">
+  <div class="container mx-auto px-4">
     <div class="flex flex-col items-center gap-6 md:gap-10 p-4 md:p-8">
       <div class="flex flex-col items-center gap-6 text-center">
         <h4 class="text-slate-200 text-sm md:text-base font-semibold font-figtree">

@@ -13,7 +13,7 @@
         <h1 class="w-full text-center text-black text-5xl font-semibold font-plus-jakarta-sans leading-[62px]">Sewa & Beli Forklift</h1>
       </div>
       <div class="w-full relative">
-        <input type="text" placeholder="Cari Forklift" class="w-full p-5 pl-12 bg-slate-50 rounded-xl text-black text-base font-normal font-plus-jakarta-sans outline-none focus:ring-2 focus:ring-slate-200">
+        <input type="text" id="product-search" placeholder="Cari Forklift" class="w-full p-5 pl-12 bg-slate-50 rounded-xl text-black text-base font-normal font-plus-jakarta-sans outline-none focus:ring-2 focus:ring-slate-200">
         <div class="absolute left-5 top-1/2 -translate-y-1/2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
@@ -78,7 +78,7 @@
           <option value="terpopuler">Terpopuler</option>
         </select>
 
-        <div class="grid grid-cols-3 gap-8">
+        <div class="grid grid-cols-4 gap-8" id="products-grid">
           <?php 
           $products = get_products();
           
@@ -110,7 +110,7 @@
           ?>
 
 
-          <div class="w-60 bg-white flex flex-col justify-start items-start gap-6">
+          <div class="product-item w-60 bg-white flex flex-col justify-start items-start gap-6" data-title="<?php echo esc_attr(strtolower(get_the_title($product->ID))); ?>">
             <a href="<?php echo get_the_permalink($product->ID); ?>" class="w-full h-60 p-5 bg-slate-100 rounded-xl flex justify-center items-center overflow-hidden">
                 <img class="w-full h-full object-cover" 
                    src="<?php echo get_the_post_thumbnail_url($product->ID) ?: get_stylesheet_directory_uri() . '/img/placeholder.png'; ?>" 
@@ -158,5 +158,41 @@
 <!-- S: Footer -->
 <?php get_template_part('parts/part-footer', null, ['section' => $section]); ?>
 <!-- E: Footer -->
+
+<!-- Add JavaScript for search functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('product-search');
+    const productsGrid = document.getElementById('products-grid');
+    const productItems = document.querySelectorAll('.product-item');
+
+    function filterProducts(searchTerm) {
+        const term = searchTerm.toLowerCase().trim();
+        
+        productItems.forEach(function(item) {
+            const title = item.getAttribute('data-title');
+            
+            if (term === '' || title.includes(term)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Filter on Enter key press
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            filterProducts(this.value);
+        }
+    });
+
+    // Optional: Also filter on input change for real-time search
+    searchInput.addEventListener('input', function() {
+        filterProducts(this.value);
+    });
+});
+</script>
 
 <?php get_footer(); ?>

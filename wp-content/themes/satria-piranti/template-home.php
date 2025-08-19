@@ -378,11 +378,11 @@ if ($blog):
         <?php endif; ?>
         <div class="px-2 md:px-4 pb-2 md:pb-4">
           <a href="<?php echo get_permalink($post->ID); ?>">
-            <h3 class="text-lg md:text-xl font-medium font-plus-jakarta leading-tight md:leading-7 mb-2 md:mb-4">
+            <h3 class="text-lg md:text-xl font-medium font-plus-jakarta line-clamp-2 leading-tight md:leading-7 mb-2 md:mb-4">
             <?php echo esc_html(get_the_title($post->ID)); ?>
           </h3>
           </a>
-          <p class="text-sm md:text-base font-normal font-figtree">
+          <p class="text-sm md:text-base font-normal font-figtree line-clamp-2">
             <?php echo wp_trim_words(get_the_excerpt($post->ID), 20); ?>
           </p>
         </div>

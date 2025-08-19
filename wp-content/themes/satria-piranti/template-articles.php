@@ -59,10 +59,10 @@ if ($featured_article):
           <div class="flex flex-col gap-2 md:gap-2.5">
             <span class="text-xs md:text-sm font-normal font-plus-jakarta-sans text-black"><?php echo $category_name; ?></span>
             <a href="<?php echo $permalink; ?>" class="hover:underline">
-              <h2 class="text-xl md:text-2xl font-semibold font-plus-jakarta-sans text-black"><?php echo $article->post_title; ?></h2>
+              <h2 class="text-xl md:text-2xl font-semibold font-plus-jakarta-sans line-clamp-2 text-black"><?php echo $article->post_title; ?></h2>
             </a>
           </div>
-          <p class="text-sm md:text-base font-normal font-plus-jakarta-sans text-black"><?php echo wp_trim_words($article->post_content, 20); ?></p>
+          <p class="text-sm md:text-base font-normal font-plus-jakarta-sans line-clamp-2 text-black"><?php echo wp_trim_words($article->post_content, 20); ?></p>
         </div>
       </article>
       <?php endforeach; ?>

@@ -21,7 +21,7 @@
 <!-- S: Short History and Value -->
 <?php if($section = get_field(selector: 'short_history')): ?> 
 <section class="relative bg-cover bg-center" style="background-image: url('<?php echo wp_get_attachment_url($section['media']['ID']); ?>');">
-    <div class="absolute inset-0 bg-gradient-to-r from-black/80 md:from-transparent md:via-black/80 md:to-black/80"></div>
+    <div class="absolute inset-0 gradient-overlay"></div>
     <div class="relative px-4 md:px-[124px] py-16 md:py-[120px]">
         <div class="container">
             <div class="grid grid-cols-1 md:grid-cols-2">

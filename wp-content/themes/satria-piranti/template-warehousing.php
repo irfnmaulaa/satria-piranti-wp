@@ -38,13 +38,21 @@
       </div>
     </div>
     
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-14">
       <?php if($gallery_images = $section['images']): ?>
-        <?php foreach($gallery_images as $index => $image): ?>
+        <?php foreach(array_values($gallery_images) as $index => $image): ?>
+          <?php 
+            $col = '';
+            if($index == 1) {
+              $col = 'md:col-[2/4]';
+            } elseif($index == 2) {
+              $col = 'md:col-[1/3]';
+            }
+          ?>
           <img 
-            class="<?php echo $index === 0 ? 'w-full md:w-96 h-64 md:h-96 object-cover' : 'w-full h-64 md:h-96 object-cover'; ?>" 
+            class="<?php echo $col; ?> <?php echo $index === 0 ? 'w-full md:w-96 h-64 md:h-96 object-cover' : 'w-full h-64 md:h-96 object-cover'; ?>"  
             src="<?php echo esc_url(wp_get_attachment_url($image['ID'])); ?>" 
-            alt="<?php echo esc_attr($image['alt']); ?>"
+            alt="<?php echo esc_attr($image['alt']); ?>" 
           />
         <?php endforeach; ?>
       <?php endif; ?>

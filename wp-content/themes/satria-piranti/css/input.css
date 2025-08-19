@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 html, body {
     scroll-behavior: smooth;
@@ -29,14 +29,13 @@ section {
 
 @media (min-width: 1024px) {
     .container {
-        max-width: 1184px;
+        max-width: 1024px;
     }
 }
 
 @media (min-width: 1280px) {
     .container {
-        padding-left: 0;
-        padding-right: 0;
+        max-width: 1280px;
     }
 }
 
@@ -418,4 +417,15 @@ a:not(.btn):not(.tab-item):not(.logo-wrapper):not(.nav-link.active):not(.social-
 }
 .custom-content h6 {
     font-size: 16px;
+}
+
+/* Custom gradient background class */
+.gradient-overlay {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
+}
+
+@media (min-width: 768px) {
+    .gradient-overlay {
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
+    }
 }

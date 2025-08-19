@@ -36,11 +36,11 @@ $items = $testimonial['items'];
       </div>
     </div>
 
-    <div class="testimonial-carousel">
+    <div class="testimonial-carousel -ms-3 w-[calc(100%_+_24px)]">
       <?php if ($items) : ?>
         <?php foreach ($items as $item) : ?>
         <?php if(!empty($item['user']['full_name'])): ?>
-          <div class="px-3 md:px-7">
+          <div class="px-3">
             <div class="rounded-[20px] border border-white flex flex-col gap-6">
               <div class="flex items-start gap-6">
                 <img 
@@ -68,7 +68,7 @@ $items = $testimonial['items'];
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      function updateTestimonial() {
         const testimonialCarousel = new Siema({
           selector: '.testimonial-carousel',
           perPage: {  
@@ -82,7 +82,9 @@ $items = $testimonial['items'];
 
         document.querySelector('.testimonial-prev').addEventListener('click', () => testimonialCarousel.prev());
         document.querySelector('.testimonial-next').addEventListener('click', () => testimonialCarousel.next());
-      });
+      }
+
+      document.addEventListener('DOMContentLoaded', updateTestimonial);
     </script>
   </div>
 </section>

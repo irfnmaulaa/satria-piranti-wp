@@ -7,6 +7,9 @@ $(document).ready(function() {
 
     let heroBg, currentSlideshowIndex = 0, slideshowTimeout
     function updatePage() {
+
+        updateTestimonial()
+
         heroBg = $('.hero-bg')
 
         $('.modal-close').click(function (e) {

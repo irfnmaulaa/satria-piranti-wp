@@ -1,7 +1,7 @@
 <?php get_header() ?>
 
 <section class="post-detail py-28">
-  <div class="container mx-auto px-4 md:px-8 lg:px-32 max-w-[1512px]">
+  <div class="container mx-auto px-4 md:px-8 lg:px-32 !max-w-[1000px]">
     <div class="flex flex-col gap-14">
       <div class="flex flex-col gap-5">
         <h1 class="text-3xl md:text-5xl font-semibold font-plus-jakarta-sans leading-tight text-black">
@@ -27,13 +27,20 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
+
+    <div class="container mx-auto px-4 md:px-8 lg:px-32 !max-w-[1264px] my-7">
       <?php if(has_post_thumbnail()): ?>
       <div class="w-full h-[632px] overflow-hidden">
         <?php the_post_thumbnail('full', array('class' => 'w-full h-full object-cover')); ?>
       </div>
       <?php endif; ?>
+    </div>
 
+  <div class="container mx-auto px-4 md:px-8 lg:px-32 !max-w-[1000px]">
+    <div class="flex flex-col gap-14"></div>
       <div class="prose max-w-none font-plus-jakarta-sans">
         <?php the_content(); ?>
       </div>

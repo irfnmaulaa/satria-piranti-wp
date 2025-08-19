@@ -25,7 +25,11 @@
     <div class="relative px-4 md:px-[124px] py-16 md:py-[120px]">
         <div class="container">
             <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="hidden md:block"></div>
+                <div class="hidden md:block">
+                  <div class="w-full h-full flex items-center justify-center">
+                      <a href="#" id="play-button" class="w-[75px] aspect-[1/1] rounded-full hover:scale-[1.2]" style="transition: .2s; background-image: url('<?php echo get_stylesheet_directory_uri() . '/img/play-icon.svg'; ?>'); background-size: contain;"></a>   
+                  </div>
+                </div>
                 <div class="col-span-1">
                     <h2 class="text-2xl md:text-4xl font-semibold text-white mb-4 md:mb-6">
                         <?php echo $section['title']; ?>
@@ -38,6 +42,51 @@
         </div>
     </div>
 </section>
+
+<?php if($youtube_url =$section['youtube_video_url']): ?> 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const playButton = document.getElementById('play-button');
+    const modal = document.getElementById('video-modal');
+    const closeButton = document.getElementById('close-modal');
+    const iframe = document.getElementById('youtube-iframe');
+    const videoUrl = '<?= $youtube_url ?>';
+
+    // Open modal when play button is clicked
+    playButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        iframe.src = videoUrl;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+
+    // Close modal when close button is clicked
+    closeButton.addEventListener('click', function() {
+        modal.classList.add('hidden');
+        iframe.src = ''; // Stop video playback
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the video
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+            iframe.src = ''; // Stop video playback
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            modal.classList.add('hidden');
+            iframe.src = ''; // Stop video playback
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+    });
+});
+</script>
+<?php endif; ?>
 <?php endif; ?>
 <!-- E: Short History and Value -->
 
@@ -121,6 +170,21 @@
 <!-- S: CTA -->
 <?php get_template_part('parts/part-cta', null, ['section' => $section]); ?>
 <!-- E: CTA -->
+
+<!-- S: Video Modal -->
+<div id="video-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div class="relative bg-white rounded-lg overflow-hidden max-w-4xl w-full mx-4">
+        <button id="close-modal" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-75 z-10">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="aspect-video">
+            <iframe id="youtube-iframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+<!-- E: Video Modal -->
 
 <!-- S: Footer -->
 <?php get_template_part('parts/part-footer', null, ['section' => $section]); ?>

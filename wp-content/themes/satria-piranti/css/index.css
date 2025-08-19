@@ -662,6 +662,10 @@ video {
   top: 100%;
 }
 
+.top-4{
+  top: 1rem;
+}
+
 .z-\[19\]{
   z-index: 19;
 }
@@ -672,6 +676,14 @@ video {
 
 .z-\[22\]{
   z-index: 22;
+}
+
+.z-10{
+  z-index: 10;
+}
+
+.z-50{
+  z-index: 50;
 }
 
 .col-span-1{
@@ -690,6 +702,11 @@ video {
 .my-7{
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
+}
+
+.mx-4{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .-ms-3{
@@ -769,6 +786,10 @@ video {
 
 .aspect-\[1\/1\]{
   aspect-ratio: 1/1;
+}
+
+.aspect-video{
+  aspect-ratio: 16 / 9;
 }
 
 .h-1\.5{
@@ -963,6 +984,10 @@ video {
   width: 100%;
 }
 
+.w-\[75px\]{
+  width: 75px;
+}
+
 .min-w-\[161px\]{
   min-width: 161px;
 }
@@ -985,6 +1010,10 @@ video {
 
 .max-w-none{
   max-width: none;
+}
+
+.max-w-4xl{
+  max-width: 56rem;
 }
 
 .flex-1{
@@ -1330,6 +1359,19 @@ video {
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.bg-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
+.bg-opacity-50{
+  --tw-bg-opacity: 0.5;
+}
+
+.bg-opacity-75{
+  --tw-bg-opacity: 0.75;
 }
 
 .bg-cover{
@@ -2337,6 +2379,18 @@ a:not(.btn):not(.tab-item):not(.logo-wrapper):not(.nav-link.active):not(.social-
   margin-bottom: 0.75em;
 }
 
+.hover\:scale-\[1\.5\]:hover{
+  --tw-scale-x: 1.5;
+  --tw-scale-y: 1.5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:scale-\[1\.2\]:hover{
+  --tw-scale-x: 1.2;
+  --tw-scale-y: 1.2;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\:bg-slate-50:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));
@@ -2344,6 +2398,10 @@ a:not(.btn):not(.tab-item):not(.logo-wrapper):not(.nav-link.active):not(.social-
 
 .hover\:bg-white\/10:hover{
   background-color: rgb(255 255 255 / 0.1);
+}
+
+.hover\:bg-opacity-75:hover{
+  --tw-bg-opacity: 0.75;
 }
 
 .hover\:\!text-white:hover{

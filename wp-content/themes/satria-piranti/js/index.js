@@ -260,26 +260,7 @@ $(document).ready(function() {
                         </button>
                     </div>
                 </div>
-            `)
-
-            $('.project-display').find('.project-display-control').click(function (e) {
-                e.preventDefault()
-                $('.project-display').find('video')[0].play()
-            })
-
-            $('.project-display').find('video').on('play', function (e) {
-                $('.project-display').find('.project-display-control').css({
-                    opacity: '0',
-                    pointerEvents: 'none',
-                })
-            })
-
-            $('.project-display').find('video').on('pause', function (e) {
-                $('.project-display').find('.project-display-control').css({
-                    opacity: '100',
-                    pointerEvents: 'unset',
-                })
-            })
+            `) 
         } else if (imageUrl) {
             $('.project-display').html(`
                 <img src="${ imageUrl }" alt="image" class="w-full rounded-[20px] h-full object-cover object-center">
